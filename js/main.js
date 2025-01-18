@@ -13,7 +13,7 @@
     });
 
     if (window.sessionStorage) {
-        var localLanguage = sessionStorage.getItem('localLanguage', document.documentElement.lang);
+        var localLanguage = sessionStorage.getItem('localLanguage', document.documentElement.lang) || "en";
         fetch(`../i18n/${localLanguage}.json`)
             .then((res) => res.json())
             .then((translation) => {
