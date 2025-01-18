@@ -5,11 +5,28 @@
     $(document).ready(function(){
         // $('#spinner-container').append('spinner.html');
         // $('#top-bar-container').load('topbar.html');
+        // $('#html_container').load('header.html');
         $('#navbar-container').load('navbar.html');
         $('#project-container').load('project_details.html');
         $('#contact-us-container').load('contact_details.html');
+        $('#footer-container').load('footer.html');
     });
 
+    if (window.sessionStorage) {
+        var localLanguage = sessionStorage.getItem('localLanguage', document.documentElement.lang);
+        fetch(`../i18n/${localLanguage}.json`)
+            .then((res) => res.json())
+            .then((translation) => {
+                var elements = document.querySelectorAll('[data-i18n]')
+                elements.forEach((element) => {
+                    var keys = element.dataset.i18n.split('.');
+                    var text = keys.reduce((obj, i) => obj[i], translation);
+                    if (text) {element.innerHTML = text;}});
+            })
+            .catch(() => {
+                console.error(`Could not load ${localLanguage}.json.`);
+            });
+    }
 
     // Spinner
     var spinner = function () {
