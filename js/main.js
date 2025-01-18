@@ -14,7 +14,7 @@
 
     if (window.sessionStorage) {
         var localLanguage = sessionStorage.getItem('localLanguage', document.documentElement.lang) || "en";
-        fetch(`../i18n/${localLanguage}.json`)
+        fetch(`${localLanguage}.json`)
             .then((res) => res.json())
             .then((translation) => {
                 var elements = document.querySelectorAll('[data-i18n]')
