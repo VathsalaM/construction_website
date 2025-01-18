@@ -8,18 +8,12 @@
                 if (window.sessionStorage) {
                    sessionStorage.setItem('localLanguage', document.documentElement.lang);
                 }
-                fetch(`/i18n/${document.documentElement.lang}.json`)
-                .then((res) => res.json())
-                .then((translation) => {
-                    var elements = document.querySelectorAll('[data-i18n]')
-                    elements.forEach((element) => {
-                        var keys = element.dataset.i18n.split('.');
-                        var text = keys.reduce((obj, i) => obj[i], translation);
-                        if (text) {element.innerHTML = text;}});
-                })
-                .catch(() => {
-                    console.error(`Could not load ${this._lang}.json.`);
-                });
+                var elements = document.querySelectorAll('[data-i18n]')
+                elements.forEach((element) => {
+                    var keys = element.dataset.i18n.split('.');
+                    var text = keys.reduce((obj, i) => obj[i], translations[document.documentElement.lang]);
+                    if (text) {element.innerHTML = text;}});
+          
                 return false;
                 })();
                 return false;">ಕನ್ನಡದಲ್ಲಿ ವೀಕ್ಷಿಸಿ</button>
